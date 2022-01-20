@@ -1,0 +1,5 @@
+# vscode configs
+.vscode/
+
+# test coverage
+coverage/

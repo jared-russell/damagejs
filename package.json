@@ -1,0 +1,29 @@
+{
+  "name": "damagejs",
+  "version": "0.0.1",
+  "description": "D&D damage curves as a JS learning exercise",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --collectCoverage",
+    "lint": "npx eslint src",
+    "docs": "jsdoc -d ./docs/ --readme README.md src"
+  },
+  "keywords": [],
+  "author": "Jared Russell <jared.d.russell@gmail.com>",
+  "license": "ISC",
+  "type": "module",
+  "jest": {
+    "transform": {}
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.28.0",
+    "jest": "^27.4.7"
+  }
+}
