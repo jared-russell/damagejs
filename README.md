@@ -4,7 +4,10 @@ damagejs is a Dungeons and Dragons 5th Edition damage calculator. It can be used
 
 The underlying math is based on [LudicSavant and AureusFulgen's Comprhensive DPR Calculator](https://forums.giantitp.com/showthread.php?582779-Comprehensive-DPR-Calculator-(v2-0)). I made this adaptation in order to teach myself javascript!
 
+Right now it's just a backend. My intent is to add a front end with React for input selection and plotting. See tests/dpr.int.
+
 ## Features still in work
+* The frontend!
 * Bonus/penalty dice for attack rolls and saving throws
 * Feats, including class features, fighting styles, etc
 * Saving throw attacks

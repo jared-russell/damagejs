@@ -10,7 +10,7 @@
  * @returns {number} The probability of a successful hit or save
  */
 function basicD20Probability (target, bonus) {
-  return (21 - target + bonus) / 20
+  return Math.min(Math.max((21 - target + bonus) / 20, 0), 1)
 }
 
 /**
@@ -114,9 +114,9 @@ export function damagePerHit (ac, hitBonus, damage, critThreshold = 20) {
   const [pDisadvantageCrit, pToCrit, pAdvantageCrit] = probabilityToCrit(critThreshold)
 
   return [
-    (pDisadvantageHit - pDisadvantageCrit) * damage.avg() + pDisadvantageCrit * damage.avg(true),
-    (pToHit - pToCrit) * damage.avg() + pToCrit * damage.avg(true),
-    (pAdvantageHit - pAdvantageCrit) * damage.avg() + pAdvantageCrit * damage.avg(true)
+    Math.max(0, (pDisadvantageHit - pDisadvantageCrit)) * damage.avg() + pDisadvantageCrit * damage.avg(true),
+    Math.max(0, (pToHit - pToCrit)) * damage.avg() + pToCrit * damage.avg(true),
+    Math.max(0, (pAdvantageHit - pAdvantageCrit)) * damage.avg() + pAdvantageCrit * damage.avg(true)
   ]
 }
 

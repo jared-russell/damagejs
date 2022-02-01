@@ -3,8 +3,8 @@
  * @module src/characters
  */
 
-import { Damages } from './damagesource'
-import { damagePerRound } from './calculators'
+import { Damages } from './damagesource.js'
+import { damagePerRound } from './calculators.js'
 
 /**
  * Collect information about an attack - Damages, as well as number of attacks and toHit bonus

@@ -68,6 +68,17 @@ export const d3 = new Die(3)
 export const d2 = new Die(2)
 /** @constant {Die} d0 0-sided die (use for flat damage) */
 export const d0 = new Die(0)
+/** @constant {Map} damageDieMap mapping of string to die type */
+export const damageDieMap = new Map([
+  ['0', d0],
+  ['2', d2],
+  ['3', d3],
+  ['4', d4],
+  ['6', d6],
+  ['8', d8],
+  ['10', d10],
+  ['12', d12]
+])
 
 // module.exports = {
 //     d100: d100

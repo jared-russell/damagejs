@@ -9,16 +9,29 @@
         "plugin:react/recommended",
         "standard"
     ],
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "globalReturn": false
         },
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "configFile": "babel.config.json",
+        "rootMode": "upward"
     },
     "plugins": [
         "react"
     ],
     "rules": {
+    },
+    "settings": {
+        "react": {
+          "createClass": "createReactClass",
+          "pragma": "React",
+          "fragment": "Fragment",
+          "version": "detect",
+          "flowVersion": "0.53"
+        }
     }
 }

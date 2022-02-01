@@ -3,7 +3,7 @@
  * Damage Source module - specifies classes for collecting attack damage sources
  * @module src/damagesource
  */
-import { Die } from './dice'
+import { Die } from './dice.js'
 
 /** @constant {string[]} damageTypes array of all valid damage types in 5e */
 const damageTypes = [
@@ -142,6 +142,8 @@ export class DamageSource {
 
     // die should be a Die
     if (!this.die || this.die.constructor !== Die) {
+      console.log(this.die)
+      console.log(this.die.constructor)
       errors.push('dieType should be of the Die class!')
     }
 
