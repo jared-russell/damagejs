@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 export const MContext = React.createContext()
 class MyProvider extends React.Component {
-  propTypes = {
-    children: PropTypes.object.isRequired,
+  static propTypes = {
+    children: PropTypes.node.isRequired,
     triggerPlot: PropTypes.func.isRequired
   }
 
@@ -13,8 +13,8 @@ class MyProvider extends React.Component {
     this.state = { acRange: [], disRange: [], normRange: [], advRange: [] }
   }
 
-  pushUpdate (value) {
-    this.setState({ plotData: value })
+  pushUpdate (value, propArgs) {
+    this.setState({ plotData: value, propArgs: propArgs })
     this.props.triggerPlot()
   }
 
@@ -23,7 +23,7 @@ class MyProvider extends React.Component {
       <MContext.Provider value={
         {
           state: this.state,
-          setPlotData: (value) => { this.pushUpdate(value) }
+          setPlotData: (value, propArgs) => { this.pushUpdate(value, propArgs) }
         }}>
       {this.props.children}
       </MContext.Provider>)

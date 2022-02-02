@@ -1,0 +1,23 @@
+.damage-name {
+  width: 100px
+}
+
+.damage-num-dice {
+  width: 30px
+}
+
+.damage-modifier {
+  width: 30px
+}
+
+.attack-tohit {
+  width: 30px
+}
+
+.attack-number {
+  width: 30px
+}
+
+.character-crit-thresh {
+  width: 30px
+}

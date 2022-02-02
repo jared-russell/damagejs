@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MContext } from './provider'
+import './damageForm.css'
 
 export class DamageSource extends React.Component {
-  propTypes = {
+  static propTypes = {
     args: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     triggerUpdate: PropTypes.func.isRequired,
@@ -21,7 +22,7 @@ export class DamageSource extends React.Component {
   }
 
   handleNameChange (event) {
-    this.setState({ name: event.target.value }, () => (this.props.triggerUpdate({ state: this.state, key: this.props.index })))
+    this.setState({ name: event.target.value })
     // this.props.triggerUpdate({state: this.state, key: this.props.index})
   }
 
@@ -30,7 +31,7 @@ export class DamageSource extends React.Component {
     // this.props.triggerUpdate({state: this.state, key: this.props.index})
   }
 
-  handleDieChang (event) {
+  handleDieChange (event) {
     this.setState({ die: event.target.value }, () => (this.props.triggerUpdate({ state: this.state, key: this.props.index })))
     // this.props.triggerUpdate({state: this.state, key: this.props.index})
   }
@@ -42,10 +43,10 @@ export class DamageSource extends React.Component {
 
   render () {
     return (
-      <div key={this.state.name}>
-        Name: <input type='text' value={this.state.name} onChange={this.handleNameChange.bind(this)}/>&nbsp;
-        Damage: <input type='number' min='0' value={this.state.nDice} onChange={this.handleNumDieChange.bind(this)}/>d
-        <select name='die' id='die-select' value={this.state.die} onChange={this.handleDieChange.bind(this)}>
+      <div key={`damage${this.props.args.index}`}>
+        Name: <input type='text' key={`name${this.props.args.index}`} className='damage-name' value={this.state.name} onChange={this.handleNameChange.bind(this)}/>&nbsp;
+        Damage: <input type='number' className='damage-num-dice' min='0' value={this.state.nDice} onChange={this.handleNumDieChange.bind(this)}/>d
+        <select name='die' className='damage-die-select' id='die-select' value={this.state.die} onChange={this.handleDieChange.bind(this)}>
           <option value='0'>0</option>
           <option value='2'>2</option>
           <option value='3'>3</option>
@@ -54,16 +55,16 @@ export class DamageSource extends React.Component {
           <option value='8'>8</option>
           <option value='10'>10</option>
           <option value='12'>12</option>
-        </select> +
-        <input type='number' value={this.state.modifier} onChange={this.handleModChange.bind(this)}/>
-        <input type='button' value='remove' onClick={this.props.removeClick.bind(this)}/>
+        </select>&nbsp;+&nbsp;
+        <input type='number' className='damage-modifier' value={this.state.modifier} onChange={this.handleModChange.bind(this)}/>
+        <input type='button' className='damage-button-remove' value='remove' onClick={this.props.removeClick.bind(this)}/>
       </div>
     )
   }
 }
 
 class AttackInfo extends React.Component {
-  propTypes = {
+  static propTypes = {
     args: PropTypes.object.isRequired,
     triggerUpdate: PropTypes.func.isRequired
   }
@@ -113,8 +114,8 @@ class AttackInfo extends React.Component {
   render () {
     return (
         <div>
-          To Hit: <input type='number' value={this.state.toHit} onChange={this.handleToHitChange.bind(this)}/>&nbsp;
-          Number of Attacks: <input type='number' min='0' value={this.state.nAttacks} onChange={this.handleNAattacksChange.bind(this)}/>
+          To Hit: <input type='number' className='attack-tohit' value={this.state.toHit} onChange={this.handleToHitChange.bind(this)}/>&nbsp;
+          Number of Attacks: <input type='number' className='attack-number' min='0' value={this.state.nAttacks} onChange={this.handleNAattacksChange.bind(this)}/>
           {this.state.damageSources.map((dmg, i) => (
             <DamageSource
               key={i}
@@ -131,8 +132,12 @@ class AttackInfo extends React.Component {
 }
 
 export class DamageForm extends React.Component {
-  constructor () {
-    super()
+  static propTypes = {
+    args: PropTypes.object.isRequired
+  }
+
+  constructor (props) {
+    super(props)
     this.state = {
       criticalHitThreshold: '20',
       mainAttackInfo: { toHit: '4', nAttacks: '1', damageSources: [{ name: 'Shortsword', nDice: '1', die: '6', modifier: '4' }] },
@@ -166,7 +171,7 @@ export class DamageForm extends React.Component {
       })
       const content = await rawResponse.json()
       console.log(content)
-      context.setPlotData(content)
+      context.setPlotData(content, this.props.args)
     } catch (error) {
       console.log(error)
     }
@@ -214,8 +219,7 @@ export class DamageForm extends React.Component {
       {(context) => (
         <div>
           {this.setContext(context)}
-          <h2>Attack Information</h2>
-          Critical Hit Threshold: <input type='number' min='0' max='20' value={this.state.criticalHitThreshold} onChange={this.handleCritThresholdUpdate.bind(this)}/>
+          Critical Hit Threshold: <input type='number' className='character-crit-thresh' min='0' max='20' value={this.state.criticalHitThreshold} onChange={this.handleCritThresholdUpdate.bind(this)}/>
           <h3>Main Action Attack</h3>
           <AttackInfo args={this.state.mainAttackInfo} triggerUpdate={this.handleMainAttackInfoUpdate} />
           <h3>Bonus Action Attack</h3>
